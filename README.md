@@ -28,13 +28,12 @@
     5. object
     6. mapObject
     7. pick
-    8. picks
 5. 사용자 정의 객체를 이터러블 프로그래밍으로 다루기
     1. Map, Set
     2. Model, Collection
     3. Product, Products
 6. 이터러블 프로그래밍 함수 계층
-    1. reduce 계열 함수 - groupBy, indexBy, countBy, partition, pick
+    1. reduce 계열 함수 - groupBy, indexBy, countBy, partition
     1. map 계열 함수 - pluck, prices, ages, mapEntries, map+pick
     2. filter 계열 함수 - reject, compact
     4. take 계열 함수 - find, every, some, none
