@@ -63,6 +63,3 @@
 11. map, filter, reduce, take 다시보기
     1. 위키피디아 페이지의 단어 새기
     2. 결국은 map, filter, reduce의 반복
-12. FxJS 더 활용하기
-    1. indexBy 해둔 것 filter 하기
-    2. 복잡하고 깊은 json 안전하게 조회하기
