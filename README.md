@@ -3,16 +3,16 @@
 ## 강의 목록
 
 1. 이터러블 프로그래밍 혹은 리스트 프로세싱 (Lisp)
-    0. 들어가며
-    1. 홀수 n개 더하기
-    2. if를 filter로
-    3. 값 변화 후 변수 할당을 map으로
-    4. break를 take로
-    5. 축약 및 합산을 reduce로
-    6. while을 range로
-    7. 효과를 each로 구분
-    8. 추억의 별 그리기
-    9. 추억의 구구단
+    1. 들어가며
+    2. 홀수 n개 더하기
+    3. if를 filter로
+    4. 값 변화 후 변수 할당을 map으로
+    5. break를 take로
+    6. 축약 및 합산을 reduce로
+    7. while을 range로
+    8. 효과를 each로 구분
+    9. 추억의 별 그리기
+    10. 추억의 구구단
 2. 명령형 습관 지우기 - 만능 reduce? No!
     1. reduce + 복잡한 함수 + acc 보다 map + 간단한 함수 + reduce
     2. reduce 하나 보다 map + filter + reduce
