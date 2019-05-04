@@ -18,7 +18,7 @@
     2. reduce 하나 보다 map + filter + reduce
     3. query, queryToObject
 3. 안전한 합성에 대해
-    1. map 다시보기
+    1. map으로 합성하기
     2. find 대신 L.filter 써보기
 4. 객체를 이터러블 프로그래밍으로 다루기
     1. values
