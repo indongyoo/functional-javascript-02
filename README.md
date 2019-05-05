@@ -30,10 +30,10 @@
     7. pick
     8. indexBy
     9. indexBy 된 값을 filter 하기
-5. 사용자 정의 객체를 이터러블 프로그래밍으로 다루기
-    1. Map, Set
-    2. Model, Collection
-    3. Product, Products
+5. 객체지향과 함께 사용하기 - 사용자 정의 객체를 이터러블 프로그래밍으로
+    1. Map, Set, NodeList
+    2. Model, Collection 클래스 만들어서 이터러블 프로토콜 지원하기
+    3. Product, Products - 메서드를 함수형으로 구현하기
 6. 이터러블 프로그래밍 함수 계층
     1. reduce 계열 함수 - groupBy, indexBy, countBy, partition
     1. map 계열 함수 - pluck, prices, ages, mapEntries, map+pick
