@@ -36,7 +36,7 @@
     3. Product, Products - 메서드를 함수형으로 구현하기
 6. 시간을 이터러블로 다루기
     1. range와 take의 재해석
-    2. take, takeWhile, takeUntil
+    2. takeWhile, takeUntil
     3. 일어나야할 일을 이터러블(리스트)로 바라보기
     4. 아임포트 결제 누락 스케쥴러 만들기
 7. 커머스 서비스 데이터를 이터러블 프로그래밍으로 다루기
