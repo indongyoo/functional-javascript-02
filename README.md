@@ -34,36 +34,31 @@
     1. Map, Set, NodeList
     2. Model, Collection 클래스 만들어서 이터러블 프로토콜 지원하기
     3. Product, Products - 메서드를 함수형으로 구현하기
-6. 이터러블 프로그래밍 함수 계층
-    1. reduce 계열 함수 - groupBy, indexBy, countBy, partition
-    1. map 계열 함수 - pluck, prices, ages, mapEntries, map+pick
-    2. filter 계열 함수 - reject, compact
-    4. take 계열 함수 - find, every, some, none
-7. 시간을 이터러블로 다루기
+6. 시간을 이터러블로 다루기
     1. range와 take의 재해석
     2. take, takeWhile, takeUntil
     3. 일어나야할 일을 이터러블(리스트)로 바라보기
     4. 아임포트 결제 누락 스케쥴러 만들기
-8. 커머스 서비스 데이터를 이터러블 프로그래밍으로 다루기
+7. 커머스 서비스 데이터를 이터러블 프로그래밍으로 다루기
     1.
     2.
-9. SNS 서비스 데이터를 이터러블 프로그래밍으로 다루기
+8. SNS 서비스 데이터를 이터러블 프로그래밍으로 다루기
     1.
     2.
-10. 프론트엔드에서 함수형/이터러블/동시성 프로그래밍
+9. 프론트엔드에서 함수형/이터러블/동시성 프로그래밍
     1. ES6 템플릿 리터럴 활용
     2. 이미지 목록 그리기
     3. 경고창 만들기 confirm, alert
     4. 경고창에서 Promise 활용
     5. 이미지 동시성 다루기
     6. 페이지 띄우기
-11. SQL을 함수형/이터러블 프로그래밍으로 다루기
+10. SQL을 함수형/이터러블 프로그래밍으로 다루기
     1. 함수형 사고
     2. QUERY
     3. INSERT
     4. UPDATE
     5. IN, EQ
     6. partition 활용, 그리고 뒤로 미루기
-12. map, filter, reduce, take 다시보기
+11. map, filter, reduce, take 다시보기
     1. 위키피디아 페이지의 단어 새기
     2. 결국은 map, filter, reduce, take의 반복

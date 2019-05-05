@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>05/1</title>
+  <script src="../fx.js"></script>
+</head>
+<body>
+
+## 시간을 이터러블로 다루기
+
+1. range와 take의 재해석
+
+<script>
+_.go(
+  _.range(10), // <-- 0 부터 9까지의 배열
+  _.take(3), // <-- 앞에서부터 3개만 자르기
+  console.log);
+
+_.go(
+  L.range(10), // <-- 0 부터 9까지의 이터러블, 최대 10번 일어날 일
+  L.take(3), // <-- 최대 3개의 값을 필요, 최대 3번의 일을 수행
+  console.log);
+</script>
+
+2. takeWhile, takeUntil
+
+<script>
+/*_.go(
+  [1, 2, 3, 4, 5, 6, 7, 8, 0, 0, 0],
+  L.takeWhile(a => a),
+  _.each(console.log));
+
+_.go(
+  [1, 2, 3, 4, 5, 6, 7, 8, 0, 0, 0],
+  L.takeUntil(a => !a),
+  _.each(console.log));
+
+_.go(
+  [0, null, false, 1, 2, 3],
+  L.takeUntil(a => a),
+  _.each(console.log));*/
+</script>
+
+3. 할 일들을 이터러블(리스트)로 바라보기
+
+<script>
+/*const pages = [
+  { words: ['사과', '바나나', '키위', '딸기'] },
+  { words: ['농구', '야구', '축구', '탁구'] },
+  { words: ['자바스크립트', '리액트', '데이터베이스'] },
+  { words: ['한국', '중국', '일본', '미국'] },
+  { words: ['애플', '페이스북', '구글', '아마존'] }
+];
+
+const delay = _.curry((a, time) =>
+  new Promise(resolve =>
+    setTimeout(() => resolve(a), time)));
+
+const getPage = idx => delay(pages[idx], 1000);
+
+_.go(
+  L.range(5),
+  L.map(getPage),
+  L.map(p => p.words),
+  L.flat,
+  _.take(10),
+  L.map(_.delay(100)),
+  _.each(console.log));*/
+</script>
+
+4. 아임포트 결제 누락 스케쥴러 만들기
+
+<script>
+const Impt = {
+  payments: {
+    1: [{ imp_id: 11, order_id: 1 }, { imp_id: 12, order_id: 2 }, { imp_id: 13, order_id: 3 }],
+    2: [{ imp_id: 14, order_id: 4 }, { imp_id: 15, order_id: 5 }, { imp_id: 16, order_id: 6 }],
+    3: [{ imp_id: 17, order_id: 7 }, { imp_id: 18, order_id: 8 }],
+    4: [],
+    5: [],
+    //...
+  },
+  getPayments: page => {
+    console.log(`http://..?page=${page}`);
+    return _.delay(1000 * 2, Impt.payments[page]);
+  },
+  cancelPayment: imp_id => Promise.resolve(`${imp_id}: 취소완료`)
+};
+
+const DB = {
+  getOrders: ids => _.delay(100, [
+    { id: 1 },
+    { id: 3 },
+    { id: 7 }
+  ])
+};
+</script>
+
+</body>
+</html>
