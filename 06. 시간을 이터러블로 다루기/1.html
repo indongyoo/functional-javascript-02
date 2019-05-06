@@ -12,61 +12,66 @@
 1. range와 take의 재해석
 
 <script>
+/*
 _.go(
-  _.range(10), // <-- 0 부터 9까지의 배열
-  _.take(3), // <-- 앞에서부터 3개만 자르기
-  console.log);
+  _.range(10), // <&#45;&#45; 0 부터 9까지의 배열
+  _.take(3), // <&#45;&#45; 앞에서부터 3개만 자르기
+  _.each(console.log));
 
 _.go(
-  L.range(10), // <-- 0 부터 9까지의 이터러블, 최대 10번 일어날 일
-  L.take(3), // <-- 최대 3개의 값을 필요, 최대 3번의 일을 수행
-  console.log);
+  L.range(1, 10), // <&#45;&#45; 0 부터 9까지의 이터러블, 최대 10번 일어날 일
+  L.map(_.delay(1000)),
+  L.filter(a => a % 2),
+  L.map(_ => new Date()),
+  _.take(3), // <&#45;&#45; 최대 3개의 값을 필요하고, 최대 3번의 일을 수행
+  _.each(console.log));
+*/
 </script>
 
 2. takeWhile, takeUntil
 
 <script>
-/*_.go(
+_.go(
   [1, 2, 3, 4, 5, 6, 7, 8, 0, 0, 0],
   L.takeWhile(a => a),
   _.each(console.log));
 
 _.go(
   [1, 2, 3, 4, 5, 6, 7, 8, 0, 0, 0],
-  L.takeUntil(a => !a),
+  L.takeUntil(a => a),
   _.each(console.log));
 
 _.go(
-  [0, null, false, 1, 2, 3],
+  [0, false, undefined, null, 10, 20, 30],
   L.takeUntil(a => a),
-  _.each(console.log));*/
+  _.each(console.log));
+
+console.clear();
 </script>
 
 3. 할 일들을 이터러블(리스트)로 바라보기
 
 <script>
-/*const pages = [
-  { words: ['사과', '바나나', '키위', '딸기'] },
-  { words: ['농구', '야구', '축구', '탁구'] },
-  { words: ['자바스크립트', '리액트', '데이터베이스'] },
-  { words: ['한국', '중국', '일본', '미국'] },
-  { words: ['애플', '페이스북', '구글', '아마존'] }
+/*
+const track = [
+  { cars: ['철수', '영희', '철희', '영수'] },
+  { cars: ['하든', '커리', '듀란트', '탐슨'] },
+  { cars: ['폴', '어빙', '릴라드', '맥컬럼'] },
+  { cars: ['스파이더맨', '아이언맨'] },
+  { cars: [] }
 ];
 
-const delay = _.curry((a, time) =>
-  new Promise(resolve =>
-    setTimeout(() => resolve(a), time)));
-
-const getPage = idx => delay(pages[idx], 1000);
-
 _.go(
-  L.range(5),
-  L.map(getPage),
-  L.map(p => p.words),
+  L.range(Infinity),
+  L.map(i => track[i]),
+  L.map(({cars}) => cars),
+  L.map(_.delay(2000)),
+  L.takeWhile(({length: l}) => l == 4),
+  // L.takeUntil(({length: l}) => l < 4),
   L.flat,
-  _.take(10),
-  L.map(_.delay(100)),
-  _.each(console.log));*/
+  L.map(car => `${car} 출발!`),
+  _.each(console.log));
+*/
 </script>
 
 4. 아임포트 결제 누락 스케쥴러 만들기
@@ -74,16 +79,27 @@ _.go(
 <script>
 const Impt = {
   payments: {
-    1: [{ imp_id: 11, order_id: 1 }, { imp_id: 12, order_id: 2 }, { imp_id: 13, order_id: 3 }],
-    2: [{ imp_id: 14, order_id: 4 }, { imp_id: 15, order_id: 5 }, { imp_id: 16, order_id: 6 }],
-    3: [{ imp_id: 17, order_id: 7 }, { imp_id: 18, order_id: 8 }],
+    1: [
+      { imp_id: 11, order_id: 1, amount: 15000 },
+      { imp_id: 12, order_id: 2, amount: 25000 },
+      { imp_id: 13, order_id: 3, amount: 10000 }
+    ],
+    2: [
+      { imp_id: 14, order_id: 4, amount: 25000 },
+      { imp_id: 15, order_id: 5, amount: 45000 },
+      { imp_id: 16, order_id: 6, amount: 15000 }
+    ],
+    3: [
+      { imp_id: 17, order_id: 7, amount: 20000 },
+      { imp_id: 18, order_id: 8, amount: 30000 }
+    ],
     4: [],
     5: [],
     //...
   },
   getPayments: page => {
     console.log(`http://..?page=${page}`);
-    return _.delay(1000 * 2, Impt.payments[page]);
+    return _.delay(1000 * 1, Impt.payments[page]);
   },
   cancelPayment: imp_id => Promise.resolve(`${imp_id}: 취소완료`)
 };
@@ -95,6 +111,44 @@ const DB = {
     { id: 7 }
   ])
 };
+
+async function job() {
+  // 결제된 결제모듈측 payments 가져온다.
+  // page 단위로 가져오는데,
+  // 결제 데이터가 있을 때까지 모두 가져와서 하나로 합친다.
+  const payments = await _.go(
+    L.range(1, Infinity),
+    L.map(Impt.getPayments),
+    L.takeUntil(({length}) => length < 3),
+    _.flat);
+
+  // 결제가 실제로 완료된 가맹점 측 주문서 id들을 뽑는다.
+  const order_ids = await _.go(
+    payments,
+    _.map(p => p.order_id),
+    DB.getOrders,
+    _.map(({id}) => id));
+
+  // 결제모듈의 payments와 가맹점의 주문서를 비교해서
+  // 결제를 취소해야할 id들을 뽑아서
+  // 결제 취소 api를 실행
+  await _.go(
+    payments,
+    L.reject(p => order_ids.includes(p.order_id)),
+    L.map(p => p.imp_id),
+    L.map(Impt.cancelPayment),
+    _.each(console.log));
+}
+
+// 5초에 한 번만 한다.
+// 그런데 만일 job 7초보다 더 걸리면, job이 끝날 때까지
+(function recur() {
+  Promise.all([
+    _.delay(7000, undefined),
+    job()
+  ]).then(recur);
+}) ();
+
 </script>
 
 </body>
