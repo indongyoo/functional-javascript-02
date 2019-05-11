@@ -88,7 +88,6 @@ console.clear();
 3. Product, Products
 
 <script>
-
 const add = (a, b) => a + b;
 const addAll = _.reduce(add);
 class Product extends Model {}
@@ -100,11 +99,14 @@ class Products extends Collection {
     return addAll(this.getPrices());
   }
 }
+
 const products = new Products();
 products.add(new Product({ id: 1, price: 10000 }));
 console.log( products.totalPrice() );
+
 products.add(new Product({ id: 3, price: 25000 }));
 console.log( products.totalPrice() );
+
 products.add(new Product({ id: 5, price: 35000 }));
 console.log( products.totalPrice() );
 </script>

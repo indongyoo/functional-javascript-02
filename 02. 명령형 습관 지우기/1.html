@@ -97,13 +97,19 @@ const query3 = obj =>
 
 console.log(query3(obj1));
 
-const query4 = _.pipe(
+/*const query4 = _.pipe(
+  Object.entries,
+  L.reject(([_, v]) => v === undefined),
+  L.map(([k, v]) => `${k}=${v}`),
+  _.reduce((a, b) => `${a}&${b}`));*/
+
+const query5 = _.pipe(
   Object.entries,
   L.reject(([_, v]) => v === undefined),
   L.map(join('=')),
   join('&'));
 
-console.log(query4(obj1));
+console.log(query5(obj1));
 console.clear();
 </script>
 
