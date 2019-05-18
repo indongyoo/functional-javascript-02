@@ -149,7 +149,7 @@ $.closest = _.curry((sel, el) => el.closest(sel));
 $.remove = el => el.parentNode.removeChild(el);
 
 $.on = (event, f) => els =>
-  _.each(el => el.addEventListener('click', f), _.isIterable(els) ? els : [els]);
+  _.each(el => el.addEventListener(event, f), _.isIterable(els) ? els : [els]);
 </script>
 
 <script>
