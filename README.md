@@ -59,6 +59,3 @@
     4. UPDATE
     5. IN, EQ
     6. partition 활용, 그리고 뒤로 미루기
-9. map, filter, reduce, take 다시보기
-    1. 위키피디아 페이지의 단어 새기
-    2. 결국은 map, filter, reduce, take의 반복
