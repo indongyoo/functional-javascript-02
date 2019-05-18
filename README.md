@@ -59,3 +59,5 @@
     4. UPDATE
     5. IN, EQ
     6. partition 활용, 그리고 뒤로 미루기
+9. 정리하며
+    1. 결국은 map, filter, reduce, take
