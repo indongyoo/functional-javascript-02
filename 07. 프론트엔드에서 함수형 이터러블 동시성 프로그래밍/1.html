@@ -197,6 +197,19 @@ Ui.confirm = Ui.message([
 Ui.alert = Ui.message([
   { name: '확인', type: 'ok', value: true }
 ]);
+
+Ui.remover = (btnSel, targetSel, before = a => a, after = a => a) => _.tap(
+  $.findAll(btnSel),
+  $.on('click', async ({currentTarget: ct}) =>
+    await Ui.confirm('정말 삭제하시겠습니까?') &&
+    _.go(
+      ct,
+      $.closest(targetSel),
+      _.tap(before),
+      $.remove,
+      _.tap(after)))
+);
+
 </script>
 
 <script>
@@ -230,31 +243,29 @@ Images.loader = limit => _.tap(
     img.onload = () => resolve(img);
     img.src = img.getAttribute('lazy-src');
   })),
-  lazy => {
-    let r = L.range(Infinity);
-    return _.go(
-      lazy,
-      _.groupBy(_ => Math.floor(r.next().value / limit)),
-      L.values,
-      L.map(L.map(f => f())),
-      L.map(C.takeAll),
-      _.each(_.each($.addClass('fade-in'))));
-  }
+  C.takeAllWithLimit(limit),
+  _.each(_.each($.addClass('fade-in')))
 );
+
+_.groupBySize = _.curry((size, iter) => {
+  let r = L.range(Infinity);
+  return _.groupBy(_ => Math.floor(r.next().value / size), iter);
+});
+
+C.takeAllWithLimit = _.curry((limit = Infinity, iter) => _.go(
+  iter,
+  _.groupBySize(limit),
+  L.values,
+  L.map(L.map(f => f())),
+  L.map(C.takeAll)));
 
 _.go(
   Images.fetch(),
   Images.tmpl,
   $.el,
   $.append($.qs('body')),
-  Images.loader(4),
-  $.findAll('.remove'),
-  $.on('click', async ({currentTarget: ct}) =>
-    await Ui.confirm('정말 삭제하시겠습니까?') &&
-    _.go(
-      ct,
-      $.closest('.image'),
-      $.remove)));
+  Ui.remover('.remove', '.image', _ => console.log('서버 통신!')),
+  Images.loader(4));
 </script>
 
 </body>
