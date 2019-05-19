@@ -247,7 +247,7 @@ _.go(
   Images.tmpl,
   $.el,
   $.append($.qs('body')),
-  Images.loader(6),
+  Images.loader(4),
   $.findAll('.remove'),
   $.on('click', async ({currentTarget: ct}) =>
     await Ui.confirm('정말 삭제하시겠습니까?') &&
