@@ -1,5 +1,8 @@
 # 함수형 프로그래밍과 Javascript ES6+ 응용편
 
+## 강의 링크
+ - [영상 강의 보러 가기](https://www.inflearn.com/course/함수형_ES6_응용편)
+
 ## 강의 목록
 
 1. 이터러블 프로그래밍 혹은 리스트 프로세싱 (Lisp)
