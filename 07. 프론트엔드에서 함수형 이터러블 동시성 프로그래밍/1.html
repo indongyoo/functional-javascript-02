@@ -137,8 +137,10 @@ console.log(`10 + 5 = ${a + b}`);*/
 <script>
 const $ = {};
 
-$.qs = document.querySelector.bind(document);
-$.qsa = document.querySelectorAll.bind(document);
+// $.qs = document.querySelector.bind(document);
+// $.qsa = document.querySelectorAll.bind(document);
+$.qs = (sel, parent = document) => parent.querySelector(sel);
+$.qsa = (sel, parent = document) => parent.querySelectorAll(sel);
 
 $.find = _.curry($.qs);
 $.findAll = _.curry($.qsa);
